@@ -1,0 +1,30 @@
+body
+{
+	background-color: #B0B0B0;
+}
+
+#header
+{
+
+	background-color: black;
+	height: 50px;
+	color: #87CEFA;
+}
+
+#un
+{
+	color: red;
+	margin-left: 1500px;
+
+	margin-right: 10px;
+	margin-top: 10px;
+	margin-bottom: 60px;
+	padding: 10px;
+
+
+}
+
+h1
+{
+	color: #000080;
+}

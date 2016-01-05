@@ -1,0 +1,30 @@
+<html>
+<head>
+  </head>
+  <body>
+
+<center>
+
+<p id="notice"><%= notice %></p>
+
+
+
+
+
+<br><br><br><br>
+
+<p id="notice"><%= notice %></p>
+
+ <%= render :partial => @post %>
+
+ <%= render 'comments/form' , :id => @post.id %>
+ 
+<br><br><br><br>
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>
+
+
+</center>
+</body>
+</html>

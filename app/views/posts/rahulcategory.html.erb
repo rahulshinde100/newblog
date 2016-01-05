@@ -1,0 +1,27 @@
+<html>
+<body>
+<center>
+	<h1>Category Wise Posts</h1>	
+<table border="2" cellpadding="10" cellspacing="0" class="listing" summary="Post list" border=2>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Category</th>
+      <th>Comment</th>
+       <th>Show Comments</th>
+  </tr>
+ </thead>
+<% @post.each do |post| %>
+	<tr>
+	<td><%= post.title %> </td>
+	<td><%= post.description %> </td>
+	<td><%= post.category.title %> </td>
+	 <td><%= link_to 'Comment', post %></td>
+	<td> <%= link_to "Show Comments",  post_comments_path(post)   %></td>
+</tr>
+<% end %>
+</table>
+</center>
+</body>
+</html>

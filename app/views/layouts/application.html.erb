@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MyBlogAssignment</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+	<div id="header">
+	<center><h1>Ruby on Rails Assignment -> BLOG</h1></center>
+	</div>
+
+	<div id="user_nav">
+<% if user_signed_in? %>
+ <font color = "blue" > <p id = "un" ><%= current_user.email %>  </font> Not You?
+<%= link_to "Sign Out", destroy_user_session_path, :method => :delete %> </p>
+<% else %>
+<center>
+<%= link_to "Sign UP", new_user_registration_path %> <br><br> or <br><br> <%= link_to "Sign In" , new_user_session_path %> <br><br> </center>
+<%end%>
+
+<% flash.each do |name, msg| %>
+<%= content_tag :div, msg, :id => "flash_#{name}" %>
+	<% end %>
+
+<%= yield %>
+
+</body>
+</html>
