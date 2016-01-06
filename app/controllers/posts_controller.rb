@@ -6,11 +6,23 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all
+    @comment = Comment.new
+
+    @categories=Category.all
     respond_with(@posts)
+  end
+
+  def tagwisesearch
+     @comment = Comment.new
+      @temp = Tag.find(params[:id])
+      @posttag =Posttag.where(:tag_id => @temp.id)
+
+      #raise @posttag.inspect
   end
 
   def rahulcategory
     #raise params.inspect
+    @comment = Comment.new
     @temp = Category.find(params[:id])
     @post =Post.where(:category_id => @temp.id)
           
@@ -82,7 +94,7 @@ p "===================================="
 
   private
     def set_post
-      @post = Post.find(params[:id])
+      @post = Post.find_by_permalink(params[:id])
     end
 
     def post_params

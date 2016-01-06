@@ -1,3 +1,5 @@
+<center>
+
 <%= form_for(@category) do |f| %>
   <% if @category.errors.any? %>
     <div id="error_explanation">
@@ -13,9 +15,13 @@
 
   <div class="field">
     <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <%= f.text_field :title , :placeholder=>'Enter the Comment' , required: true %>
   </div>
+
+  <br><br>
   <div class="actions">
     <%= f.submit %>
   </div>
-<% end %>
+<% end %><br>
+<%= link_to 'Home', posts_path %><br><br>
+</center>

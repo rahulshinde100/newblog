@@ -22,6 +22,7 @@ MyBlogAssignment::Application.routes.draw do
   resources :posts do
     member do
        get 'rahulcategory'
+       get 'tagwisesearch'
   #       post 'toggle'
 end
    end

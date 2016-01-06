@@ -20,12 +20,14 @@
 
   <div class="field">
     <%= f.label :tag_title %><br>
-    <%= f.text_field :tag_title %>
-  </div>
+    <%= f.text_field :tag_title , :placeholder=>'Enter the Tag' , required: true %>
+  </div><br><br>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+<br><br>
+<%= link_to 'Home', posts_path %><br><br>
 </center>
 </body>
 </html>

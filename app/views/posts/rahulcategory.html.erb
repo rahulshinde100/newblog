@@ -14,7 +14,7 @@
  </thead>
 <% @post.each do |post| %>
 	<tr>
-	<td><%= post.title %> </td>
+	<td><%=link_to post.title %> </td>
 	<td><%= post.description %> </td>
 	<td><%= post.category.title %> </td>
 	 <td><%= link_to 'Comment', post %></td>
@@ -22,6 +22,79 @@
 </tr>
 <% end %>
 </table>
+
+
+
+<br>
+<%= link_to 'Home', posts_path %>
+
+<br><br><br>
+
+<%= link_to 'Back', categories_path %>
+
+<br><br>
+
+<%##############################Show Category Wise ####################################%>
+
+
+
+<% @post.each do |post| %>
+   
+  <div id="showpost">
+    <%= post.user.email %>
+<% if user_signed_in?  %>
+      <%if post.user.id == current_user.id  %>
+
+   <%= link_to 'Post Delete', post, method: :delete, data: { confirm: 'Are you sure?' }  rescue "" %>
+
+      <% end %>
+      <% end %>
+     <p id ="showtitle">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<%= post.title %></p>
+     <p id="showdescription"><%= post.description %></p>
+     
+         
+            <p id= "catid"> Category:-<%= post.category.title %> </p>
+
+
+              <p id="tagid" > Tags:- <% post.tags.each do |tag| %>
+              <%= tag.tag_title %> ,
+          <% end %></p>
+
+     
+      <% @com=post.comments %>
+        
+     
+     <% @com.each do |c| %>
+      <p id ="commentid">  <%= link_to 'x', c, method: :delete, data: { confirm: 'Are you sure?' } %> <%= c.user.email %>:- <%= c.comment_string %><br></p>
+     <% end %>
+      <%#= render :partial => @post %>
+      <%#= render :partial => @post %>
+
+      <%#= render 'comments/form' %>
+
+
+       <%= form_for @comment , url: comments_path , method: 'post' do |f| %>
+    <%= f.label "Comment" %>
+    <%= f.text_area :comment_string , :placeholder=>'Enter the Comment' , required: true , :id => "comment" %><br><br>
+    <%= f.hidden_field :post_id , value: post.id %>
+
+
+    
+      
+
+    &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;<%= f.submit "Comment" %><br><br>
+      <% end %>
+
+
+  </div>
+   <% end %>
+
+
+
+<%##################################################################%>
+
+
+
 </center>
 </body>
 </html>

@@ -1,12 +1,12 @@
 class CommentsController < ApplicationController
     before_filter :authenticate_user!, :except => [ :index, :show ]
-  before_action :set_comment, only: [:edit, :update, :destroy]
+  before_action :set_comment, only: [:show,:edit, :update, :destroy]
 
   respond_to :html
 
   def index
     #raise params.inspect
-    @comments = Post.find(params[:post_id]).comments#.all
+    @comments = Post.find_by_permalink(params[:post_id]).comments
     respond_with(@comments)
   end
 
@@ -24,6 +24,7 @@ class CommentsController < ApplicationController
   end
 
   def new
+    
     @comment = Comment.new
     respond_with(@comment)
   end
@@ -47,12 +48,12 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment.destroy
-    respond_with(@comments)
+    redirect_to posts_path
   end
 
   private
     def set_comment
-      @comment = Comment.find(params[:id])
+      @comment = Comment.find_by_permalink(params[:id])
     end
 
     def comment_params

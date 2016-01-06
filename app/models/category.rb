@@ -4,8 +4,8 @@ class Category < ActiveRecord::Base
 	has_many :tags
 	has_many :posttags
 	has_many :comments
-	#has_permalink :title
-	#def to_param
-	#	permalink
-	#end
+	has_permalink :title
+	def to_param
+		permalink
+	end
 end

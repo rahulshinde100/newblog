@@ -28,12 +28,12 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
     @category.save
-    respond_with(@category)
+      redirect_to posts_path
   end
 
   def update
     @category.update(category_params)
-    respond_with(@category)
+  redirect_to posts_path
   end
 
   def destroy
@@ -43,10 +43,11 @@ class CategoriesController < ApplicationController
 
   private
     def set_category
-      @category = Category.find(params[:id])
+      @category = Category.find_by_permalink(params[:id])
     end
 
     def category_params
-      params.require(:category).permit(:title)
+       params["category"].merge!(user_id: current_user.id)
+      params.require(:category).permit(:title , :user_id)
     end
 end

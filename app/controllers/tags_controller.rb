@@ -29,7 +29,7 @@ class TagsController < ApplicationController
 
   def update
     @tag.update(tag_params)
-    respond_with(@tag)
+    redirect_to posts_path
   end
 
   def destroy
@@ -39,7 +39,7 @@ class TagsController < ApplicationController
 
   private
     def set_tag
-      @tag = Tag.find(params[:id])
+      @tag = Tag.find_by_permalink(params[:id])
     end
 
     def tag_params

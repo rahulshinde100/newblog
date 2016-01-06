@@ -11,9 +11,11 @@
     </div>
   <% end %>
 
+
+
   <div class="field">
     <%= f.label "Comment" %><br>
-    <%= f.text_area :comment_string %>
+    <%= f.text_area :comment_string , :placeholder=>'Enter the Comment' , required: true %>
     <%= f.hidden_field :post_id   , value: @post.id %>
   </div>
   <br><br>
@@ -21,3 +23,4 @@
     <%= f.submit %>
   </div>
 <% end %>
+<%= link_to 'Home', posts_path %>

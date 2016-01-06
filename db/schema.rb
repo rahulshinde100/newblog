@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160105115954) do
+ActiveRecord::Schema.define(version: 20160106102745) do
 
   create_table "categories", force: true do |t|
     t.string   "title"
@@ -30,8 +30,10 @@ ActiveRecord::Schema.define(version: 20160105115954) do
     t.integer  "post_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "permalink"
   end
 
+  add_index "comments", ["permalink"], name: "index_comments_on_permalink", using: :btree
   add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
@@ -42,9 +44,11 @@ ActiveRecord::Schema.define(version: 20160105115954) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "category_id"
+    t.string   "permalink"
   end
 
   add_index "posts", ["category_id"], name: "index_posts_on_category_id", using: :btree
+  add_index "posts", ["permalink"], name: "index_posts_on_permalink", using: :btree
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "posttags", force: true do |t|
@@ -59,8 +63,10 @@ ActiveRecord::Schema.define(version: 20160105115954) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "permalink"
   end
 
+  add_index "tags", ["permalink"], name: "index_tags_on_permalink", using: :btree
   add_index "tags", ["user_id"], name: "index_tags_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
