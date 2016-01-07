@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
   def index
     #raise params.inspect
     @comments = Post.find_by_permalink(params[:post_id]).comments
-    respond_with(@comments)
+     #redirect_to comments_path
   end
 
 
@@ -38,7 +38,7 @@ class CommentsController < ApplicationController
     @comment.save
     #respond_with(@comment)
     # @post =Post.new
-    redirect_to(:back)
+    redirect_to postwisesearch_category_path(@comment.post_id)
   end
 
   def update
@@ -48,7 +48,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment.destroy
-    redirect_to posts_path
+    redirect_to categories_path
   end
 
   private

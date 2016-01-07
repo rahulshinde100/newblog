@@ -5,12 +5,49 @@ class CategoriesController < ApplicationController
   respond_to :html
 
   def index
-    @categories = Category.all
+    #@categories = Category.all
+
+     @posts = Post.all
+    @comment = Comment.new
+
+    @categories=Category.all
 
   
     #@categories = Post.find(:id => params[:post_id])#.all
     respond_with(@categories)
   end
+
+
+  def postwisesearch
+
+    #raise params.inspect
+    @comment =Comment.new
+    @post = Post.find_by_permalink(params[:id])
+   # raise @posts.inspect
+      
+    end 
+
+  def tagwisesearch
+     @comment = Comment.new
+      @tag = Tag.find_by_permalink(params[:id])
+      @posttag =Posttag.where(:tag_id => @tag.id)
+
+      #raise @posttag.inspect
+  end
+
+  def rahulcategory
+    #raise params.inspect
+    @comment = Comment.new
+
+    @category = Category.find_by_permalink(params[:id])
+    @post =Post.where(:category_id => @category.id)
+          
+  end
+
+
+
+
+  
 
   def show
     @categories = Category.all
@@ -28,17 +65,17 @@ class CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
     @category.save
-      redirect_to posts_path
+    redirect_to categories_path
   end
 
   def update
     @category.update(category_params)
-  redirect_to posts_path
+  redirect_to categories_path
   end
 
   def destroy
     @category.destroy
-    respond_with(@category)
+   redirect_to categories_path
   end
 
   private

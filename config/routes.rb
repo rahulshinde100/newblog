@@ -1,12 +1,8 @@
 MyBlogAssignment::Application.routes.draw do
   
   resources :comments
-  resources :categories do
+  resources :categories
 
-  resources :posts do
-  resources :comments 
-  end
-end
 resources :posts do
   resources :comments 
   end
@@ -19,10 +15,10 @@ resources :posts do
   
 
 
-  root to: "posts#index"
+  root to: "categories#index"
 
 
-  resources :posts do
+  resources :categories do
     member do
        get 'rahulcategory'
        get 'tagwisesearch'

@@ -6,40 +6,18 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all
-    @comment = Comment.new
+    #@comment = Comment.new
 
-    @categories=Category.all
+    #@categories=Category.all
     
     respond_with(@posts) 
   end
 
-   def postwisesearch
-
-    #raise params.inspect
-    @comment =Comment.new
-    @post = Post.find(params[:id])
-   # raise @posts.inspect
-      
-    end 
-
-  def tagwisesearch
-     @comment = Comment.new
-      @temp = Tag.find(params[:id])
-      @posttag =Posttag.where(:tag_id => @temp.id)
-
-      #raise @posttag.inspect
-  end
-
-  def rahulcategory
-    #raise params.inspect
-    @comment = Comment.new
-    @temp = Category.find(params[:id])
-    @post =Post.where(:category_id => @temp.id)
-          
-  end
+   
     
 
   def show
+    #raise params.inspect
     @comment = Comment.new
     respond_with(@post)
   end
@@ -99,7 +77,7 @@ p "===================================="
     #p @tags
     Posttag.where(:post_id => params[:id]).destroy_all
     @post.destroy
-    respond_with(@post)
+     redirect_to categories_path
   end
 
   private

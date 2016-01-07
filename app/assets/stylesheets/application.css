@@ -3,6 +3,11 @@ body
 	background-color: #B0B0B0;
 }
 
+#home
+{
+	 float:left;
+	 margin-left: 20px;		
+}
 
 #tagid
 {

@@ -1,10 +1,10 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  has_many :tags
-  has_many :posts
-  has_many :categories
-  has_many :comments
+  has_many :tags , dependent: :destroy
+  has_many :posts , dependent: :destroy
+  has_many :categories , dependent: :destroy
+  has_many :comments , dependent: :destroy
 
   
   devise :database_authenticatable, :registerable,

@@ -29,7 +29,7 @@ class TagsController < ApplicationController
 
   def update
     @tag.update(tag_params)
-    redirect_to posts_path
+    redirect_to categories_path
   end
 
   def destroy

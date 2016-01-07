@@ -12,9 +12,16 @@
 	</div>
 
 	<div id="user_nav">
+
+		<div id ="home">
+		<font size= "20" ,color ="Red"><%= link_to 'Home', categories_path , {:style=>'color:#Ff0000;'} %> </font>
+		</div>
+		<div id ="usr" >
+			
 <% if user_signed_in? %>
- <font color = "blue" > <p id = "un" ><%= current_user.email %>  </font> Not You?
+ <font color = "blue" > <p id = "un" ><%= current_user.email %>   </font> Not You?
 <%= link_to "Sign Out", destroy_user_session_path, :method => :delete %> </p>
+		</div>
 <% else %>
 <center>
 <%= link_to "Sign UP", new_user_registration_path %> <br><br> or <br><br> <%= link_to "Sign In" , new_user_session_path %> <br><br> </center>
@@ -25,6 +32,7 @@
 	<% end %>
 
 <%= yield %>
+</div>
 
 </body>
 </html>

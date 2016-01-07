@@ -1,48 +1,84 @@
-<center><h1>Listing categories</h1>
+<html>
+<head>
+  </head>
+  <body>
 
-<table border="2" cellpadding="10" cellspacing="0" class="listing" summary="Post list" border=2>
+<center>
+
+ <%= link_to "New Category", new_category_path  ,  {:style=>'color:#0000ff;'} %> ||
+  <%= link_to "Tags", tags_path , {:style=>'color:#9932CC;'} %>
+
+
+<br><br>
+<font size = "15" ><%= link_to 'New Post', new_post_path %> </font><br><br>
+
+<%############################## Show Category wise ####################################%>
+
+
+<h1>All Categories</h1>
+  <table border="2" cellpadding="10" cellspacing="0" class="listing" summary="Post list" border=2>
   <thead>
     <tr>
-       <th>User</th>
-      <th>Title</th>
+      <th>Total Posts</th> 
+      <th>Total Comments</th> 
+      <th>Title</th> 
+       <th>Tags</th> 
+       <th>Destroy</th> 
+      
      
-      <% if user_signed_in? %>
-       
-      <th>Edit</th>
-      <th>Destroy</th>
-       
-        <% end %>
     </tr>
   </thead>
+    <tr>
 
-  <tbody>
-    <% @categories.each do |category| %>
-      <tr>
-         <td><%= category.user.email %></td>
-        <td><%=link_to category.title , rahulcategory_post_path(category.id) rescue ""  %></td>
-        
-        <% if user_signed_in? %>
-        <% if category.user.id == current_user.id %>
-        <td><%= link_to 'Edit', edit_category_path(category) %></td>
-        <end>
-        <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% else %>
-          <td></td>
-          <td></td>
-         <% end %>
-        <% end %>
-      </tr>
+      <% @categories.each do |c| %>
+
+      <td align="center">
+            <%= c.posts.count(:category_id) rescue "" %>
+     </td>
+
+     <td align="center">
+              <%total_comment = 0 %>
+              <% @cpost = c.posts %>
+              <% @cpost.each do |cp| %>
+
+            <% total_c=cp.comments.count(:post_id) %>
+            <% total_comment =total_comment + total_c  %>
+            <% end %>
+             <%= total_comment %>
+     </td>
+
+
+
+
+      <td align="center">
+            <%=link_to c.title.capitalize , rahulcategory_category_path(c.permalink) rescue ""  %>
+     </td>
+
+     <td>
+        <% @cpost = c.posts %>
+          <%  %>
+         <%# @cpost.each do |post| %>
+
+        <% @cpost.map(&:tags).flatten.map(&:tag_title).uniq.each do |t| %>
+            <%#= post.tags.uniq.join(' , ')%>
+              <% tagid = Tag.find_by_tag_title(t) %>
+              <%= link_to t , tagwisesearch_category_path(tagid.permalink) %> ,
+          <% end %>
+          <%# end %>
+     </td>
+
+
+
+     <td>
+     <%= link_to 'Destroy', c, method: :delete, data: { confirm: 'Are you sure?' } %>
+     </td>
+     
+
+
+
+    </tr>
     <% end %>
-  </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Category', new_category_path %><br><br><br>
-
-
-<%= link_to 'New Post', new_post_path %> <br><br> <br>
-<%= link_to 'Home', posts_path %>
 
 
 
@@ -51,3 +87,6 @@
 
 
 </center>
+</body>
+</html>
+
