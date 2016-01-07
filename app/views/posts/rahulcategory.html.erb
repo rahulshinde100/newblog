@@ -14,7 +14,7 @@
  </thead>
 <% @post.each do |post| %>
 	<tr>
-	<td><%=link_to post.title %> </td>
+	<td><%=link_to post.title , postwisesearch_post_path(post.id) %> </td>
 	<td><%= post.description %> </td>
 	<td><%= post.category.title %> </td>
 	 <td><%= link_to 'Comment', post %></td>
@@ -28,7 +28,9 @@
 <br>
 <%= link_to 'Home', posts_path %>
 
-<br><br><br>
+<br><br>
+
+<%= link_to 'New Post', new_post_path %> <br><br>
 
 <%= link_to 'Back', categories_path %>
 
@@ -53,11 +55,11 @@
      <p id="showdescription"><%= post.description %></p>
      
          
-            <p id= "catid"> Category:-<%= post.category.title %> </p>
+            <p id= "catid"> Category:-<%=link_to post.category.title , rahulcategory_post_path(post.category.id) rescue ""  %> </p>
 
 
               <p id="tagid" > Tags:- <% post.tags.each do |tag| %>
-              <%= tag.tag_title %> ,
+              <%=link_to tag.tag_title , tagwisesearch_post_path(tag.id) %> ,
           <% end %></p>
 
      

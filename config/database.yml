@@ -11,7 +11,7 @@
 development:
   adapter: mysql
   encoding: utf8
-  database: MyBlogAssignment_development
+  database: MyBlogAssignment1_development
   pool: 5
   username: root
   password: anchanto
@@ -23,7 +23,7 @@ development:
 test:
   adapter: mysql
   encoding: utf8
-  database: MyBlogAssignment_test
+  database: MyBlogAssignment1_test
   pool: 5
   username: root
   password: anchanto
@@ -32,7 +32,7 @@ test:
 production:
   adapter: mysql
   encoding: utf8
-  database: MyBlogAssignment_production
+  database: MyBlogAssignment1_production
   pool: 5
   username: root
   password: anchanto

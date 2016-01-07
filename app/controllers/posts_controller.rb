@@ -9,8 +9,18 @@ class PostsController < ApplicationController
     @comment = Comment.new
 
     @categories=Category.all
-    respond_with(@posts)
+    
+    respond_with(@posts) 
   end
+
+   def postwisesearch
+
+    #raise params.inspect
+    @comment =Comment.new
+    @post = Post.find(params[:id])
+   # raise @posts.inspect
+      
+    end 
 
   def tagwisesearch
      @comment = Comment.new

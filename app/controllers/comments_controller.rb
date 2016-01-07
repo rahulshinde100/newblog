@@ -38,7 +38,7 @@ class CommentsController < ApplicationController
     @comment.save
     #respond_with(@comment)
     # @post =Post.new
-    redirect_to posts_path
+    redirect_to(:back)
   end
 
   def update

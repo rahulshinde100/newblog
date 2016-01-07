@@ -1,12 +1,15 @@
 MyBlogAssignment::Application.routes.draw do
   
   resources :comments
-  resources :categories
+  resources :categories do
 
   resources :posts do
   resources :comments 
   end
-
+end
+resources :posts do
+  resources :comments 
+  end
   resources :tags
 
   devise_for :users
@@ -23,6 +26,7 @@ MyBlogAssignment::Application.routes.draw do
     member do
        get 'rahulcategory'
        get 'tagwisesearch'
+       get 'postwisesearch'
   #       post 'toggle'
 end
    end

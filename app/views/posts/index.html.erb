@@ -18,7 +18,9 @@
         <th>Comment</th>
 
       <th>Show Comments</th>
+        <% if user_signed_in?  %>
       <th>Destroy Post</th>
+        <% end %>
     </tr>
   </thead>
 
@@ -33,7 +35,16 @@
         <td><%= link_to 'Comment', post %></td>
 
         <td> <%= link_to "Show Comments",  post_comments_path(post)   %></td>
+          <% if user_signed_in?  %>
+      <%if post.user.id == current_user.id  %>
+
         <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+           <% else %>
+          
+            <td></td>
+          <% end %>
+        
+         <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -42,26 +53,30 @@
 <br>
 <%= link_to 'New Post', new_post_path %> <br><br>
 
+<%############################## Show Category wise ####################################%>
+
+
+<h1>All Categories</h1>
   <table border="2" cellpadding="10" cellspacing="0" class="listing" summary="Post list" border=2>
   <thead>
     <tr>
-      <th>Title</th> 
       <th>Total Posts</th> 
       <th>Total Comments</th> 
+      <th>Title</th> 
+       <th>Tags</th> 
+      
+     
     </tr>
   </thead>
     <tr>
 
       <% @categories.each do |c| %>
 
-      <td>
-            <%=link_to c.title , rahulcategory_post_path(c.id) rescue ""  %>
-     </td>
-     <td>
-            <%= c.posts.count(:category_id) %>
+      <td align="center">
+            <%= c.posts.count(:category_id) rescue "" %>
      </td>
 
-     <td>
+     <td align="center">
               <%total_comment = 0 %>
               <% @cpost = c.posts %>
               <% @cpost.each do |cp| %>
@@ -71,6 +86,27 @@
             <% end %>
              <%= total_comment %>
      </td>
+
+
+
+
+      <td align="center">
+            <%=link_to c.title , rahulcategory_post_path(c.id) rescue ""  %>
+     </td>
+
+     <td>
+        <% @cpost = c.posts %>
+          <%  %>
+         <%# @cpost.each do |post| %>
+
+        <% @cpost.map(&:tags).flatten.map(&:tag_title).uniq.each do |t| %>
+            <%#= post.tags.uniq.join(' , ')%>
+              <% tagid = Tag.find_by_tag_title(t) %>
+              <%= link_to t , tagwisesearch_post_path(tagid.id) %> ,
+          <% end %>
+          <%# end %>
+     </td>
+     
 
     </tr>
     <% end %>
@@ -96,11 +132,11 @@
      <p id="showdescription"><%= post.description %></p>
      
          
-            <p id= "catid"> Category:-<%= post.category.title %> </p>
+            <p id= "catid"> Category:-<%=link_to post.category.title , rahulcategory_post_path(post.category.id) rescue ""  %> </p>
 
 
               <p id="tagid" > Tags:- <% post.tags.each do |tag| %>
-              <%= tag.tag_title %> ,
+              <%=link_to tag.tag_title, tagwisesearch_post_path(tag.id)  %> ,
           <% end %></p>
 
      
@@ -108,7 +144,17 @@
         
      
      <% @com.each do |c| %>
-      <p id ="commentid">  <%= link_to 'x', c, method: :delete, data: { confirm: 'Are you sure?' } %> <%= c.user.email %>:- <%= c.comment_string %><br></p>
+
+      <p id ="commentid"> 
+        <% if user_signed_in? %>
+        <% if c.user.id == current_user.id %>
+       <%= link_to 'x', c, method: :delete, data: { confirm: 'Are you sure?' } %>
+       <% end %>
+       <% end %>
+       
+        <%= c.user.email %>:- <%= c.comment_string %>
+        <br></p>
+
      <% end %>
       <%#= render :partial => @post %>
       <%#= render :partial => @post %>
