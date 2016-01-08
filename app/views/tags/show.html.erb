@@ -1,19 +1,42 @@
 <html>
-<head>
-  </head>
-  <body>
-
+<body>
 <center>
 
-<p id="notice"><%= notice %></p>
+	<h1><%= @tag.tag_title %> Tag Posts </h1>	
+<table border="2" cellpadding="10" cellspacing="0" class="listing" summary="Post list" border=2>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Category</th>   
+  </tr>
+ </thead>
 
-<p>
-  <strong>Tag title:</strong>
-  <%= @tag.tag_title %>
-</p>
+<% @posttag.each do |p| %>
+<% if p.post.present? %>
+	<tr>
 
-<%= link_to 'Edit', edit_tag_path(@tag) %> |
-<%= link_to 'Back', tags_path %>
+    <%#= raise p.inspect  %>
+	<td><%= link_to p.post.title , category_post_path(p.post.category.permalink , p.post.permalink) rescue "" %> </td>
+	<td><%= p.post.description %> </td>
+	<td><%= link_to p.post.category.title , category_path(p.post.category.permalink) rescue "" %> </td>
+</tr>
+<% end %>
+<% end %>
+</table>
+<br>
+
+<font size ="5"><%= link_to 'New Post', new_category_post_path %></font> <br><br>
+<br>
+
+</font size = "5"><%= link_to 'Back', :back %></font>
+
+<br>
+
+
+
+
+
 </center>
 </body>
 </html>

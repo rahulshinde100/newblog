@@ -1,9 +1,43 @@
-<p id="notice"><%= notice %></p>
+<html>
+<body>
+<center>
+	<h1><%= @category.title.capitalize %> Category Posts</h1>	
+<table border="2" cellpadding="10" cellspacing="0" class="listing" summary="Post list" border=2>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+     
+  </tr>
+ </thead>
+<% @post.each do |post| %>
+	<tr>
+	<td><%=link_to post.title , category_post_path(post.category,post) %> </td>
+	<td><%= post.description %> </td>
+	
+	
+</tr>
+<% end %>
+</table>
 
-<p>
-  <strong>Title:</strong>
-  <%= @category.title %>
-</p>
 
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>
+
+
+<br><br>
+
+<font size ="5"><%= link_to 'New Post', new_category_post_path(@category) %></font> <br><br>
+
+<%= link_to "Tags", new_category_tag_path(@category) , {:style=>'color:#9932CC;'} %> <br><br><br>
+
+<font size ="5"><%= link_to 'Back', categories_path %></font>
+
+<br><br>
+
+
+
+
+
+</center>
+</body>
+</html>
+

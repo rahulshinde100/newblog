@@ -5,12 +5,12 @@
 
 <center>
 
- <%= link_to "New Category", new_category_path  ,  {:style=>'color:#0000ff;'} %> ||
-  <%= link_to "Tags", tags_path , {:style=>'color:#9932CC;'} %>
+ || <%= link_to "New Category", new_category_path  ,  {:style=>'color:#0000ff;'} %> ||
+  <%#= link_to "Tags", tags_new_path(1) , {:style=>'color:#9932CC;'} %>
 
 
 <br><br>
-<font size = "15" ><%= link_to 'New Post', new_post_path %> </font><br><br>
+<font size = "15" ><%#= link_to 'New Post',  posts_new_path %> </font><br><br>
 
 <%############################## Show Category wise ####################################%>
 
@@ -23,7 +23,10 @@
       <th>Total Comments</th> 
       <th>Title</th> 
        <th>Tags</th> 
-       <th>Destroy</th> 
+       <% if user_signed_in? %>
+       <th>Edit</th>
+       <th>Destroy</th>
+       <% end %>
       
      
     </tr>
@@ -51,7 +54,7 @@
 
 
       <td align="center">
-            <%=link_to c.title.capitalize , rahulcategory_category_path(c.permalink) rescue ""  %>
+            <%=link_to c.title.capitalize , category_path(c.permalink) rescue ""  %>
      </td>
 
      <td>
@@ -62,19 +65,30 @@
         <% @cpost.map(&:tags).flatten.map(&:tag_title).uniq.each do |t| %>
             <%#= post.tags.uniq.join(' , ')%>
               <% tagid = Tag.find_by_tag_title(t) %>
-              <%= link_to t , tagwisesearch_category_path(tagid.permalink) %> ,
+              <%= link_to t , category_tag_path(c.permalink , tagid.permalink) %> ,
           <% end %>
           <%# end %>
      </td>
 
-
+      <% if user_signed_in? %>
+      <% if c.user.id == current_user.id %>
 
      <td>
-     <%= link_to 'Destroy', c, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <%= link_to 'Edit', edit_category_path(c) %>
+     </td>
+
+     <td>
+     <%= link_to 'Destroy', c , method: :delete, data: { confirm: 'Are you sure?' } %>
+     </td>
+     <% else %>
+     <td>
+     </td>
+      <td>
      </td>
      
+      <% end %>
 
-
+     <% end %>
 
     </tr>
     <% end %>

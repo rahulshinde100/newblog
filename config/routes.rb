@@ -1,31 +1,23 @@
 MyBlogAssignment::Application.routes.draw do
   
-  resources :comments
-  resources :categories
 
-resources :posts do
-  resources :comments 
+  resources :categories do
+    resources :posts do
+      resources :comments
+    end
+    resources :tags
   end
-  resources :tags
+
 
   devise_for :users
 
   resources :dashboard 
   
   
-
-
   root to: "categories#index"
 
 
-  resources :categories do
-    member do
-       get 'rahulcategory'
-       get 'tagwisesearch'
-       get 'postwisesearch'
-  #       post 'toggle'
-end
-   end
+ 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

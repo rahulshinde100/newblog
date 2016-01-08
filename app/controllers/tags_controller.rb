@@ -10,10 +10,17 @@ class TagsController < ApplicationController
   end
 
   def show
-    respond_with(@tag)
+
+      #raise params.inspect
+
+      @comment = Comment.new
+      @tag = Tag.find_by_permalink(params[:id])
+      @posttag =Posttag.where(:tag_id => @tag.id)
+   # respond_with(@tag)
   end
 
   def new
+     @category = Category.find_by_permalink(params[:category_id])
     @tag = Tag.new
     respond_with(@tag)
   end
@@ -24,7 +31,7 @@ class TagsController < ApplicationController
   def create
     @tag = Tag.new(tag_params)
     @tag.save
-    respond_with(@tag)
+    redirect_to categories_path
   end
 
   def update

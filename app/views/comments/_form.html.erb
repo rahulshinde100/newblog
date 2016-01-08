@@ -1,4 +1,10 @@
-<%= form_for(@comment) do |f| %>
+<%# raise params.inspect %>
+<% @post = Post.find_by_permalink(params[:id]) %>
+<%# @category = Category.find_by_permalink(@post.category_id) %>
+<% @category = @post.category %>
+
+<%  @comment=Comment.new %>
+<%= form_for [@category, @post, @comment] do |f| %>
   <% if @comment.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
@@ -23,4 +29,3 @@
     <%= f.submit %>
   </div>
 <% end %>
-<%= link_to 'Home', categories_path %>

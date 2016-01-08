@@ -18,11 +18,16 @@ class PostsController < ApplicationController
 
   def show
     #raise params.inspect
-    @comment = Comment.new
-    respond_with(@post)
+      @comment =Comment.new
+      @post = Post.find_by_permalink(params[:id])
+    #@comment = Comment.new
+    #respond_with(@post)
   end
 
   def new
+   # raise params.inspect
+    @category = Category.find_by_permalink(params[:category_id])
+    #raise @category.inspect
     @post = Post.new
     @all_tags =Tag.all
     @post_tag = @post.posttags.build
@@ -61,7 +66,7 @@ class PostsController < ApplicationController
       end
     end
    
-    respond_with(@post)
+    redirect_to categories_path
   end
 
   def update

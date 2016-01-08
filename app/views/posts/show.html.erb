@@ -1,30 +1,59 @@
 <html>
-<head>
-  </head>
-  <body>
-
+<body>
 <center>
 
-<p id="notice"><%= notice %></p>
+   
+  <div id="showpost">
+    <%# raise @post.inspect %>
+    <%= @post.user.email %>
+<% if user_signed_in?  %>
+
+      <% if @post.user.id == current_user.id  %>
 
 
+   <%= link_to 'Post Delete', category_post_path(@post.category_id , @post), method: :delete, data: { confirm: 'Are you sure?' }  rescue "" %>
+
+      <% end %>
+      <% end %>
+     <p id ="showtitle"> <font size = "7" ><%= @post.title.capitalize %></font></p>
+     <p id="showdescription"><%= @post.description %></p>
+     
+         
+            <p id= "catid"> Category:-<%= @post.category.title %> </p>
 
 
+              <p id="tagid" > Tags:- <% @post.tags.each do |tag| %>
+              <%=link_to tag.tag_title , category_tag_path( @post.category , tag ) %> ,
+          <% end %></p>
 
-<br><br><br><br>
+     
+      <% @com=@post.comments %>
+        
+     
+     <% @com.each do |c| %>
+      <% if user_signed_in? %>
+      <% if c.user.id == current_user.id %>
 
-<p id="notice"><%= notice %></p>
+        <%#= link_to '-', edit_category_post_comment_path(@post.category , @post, c ) %>
 
- <%= render :partial => @post %>
+        <p id ="commentid">  <%= link_to 'x', category_post_comment_path(@post.category.id , @post.id, c ) , method: :delete, data: { confirm: 'Are you sure?' } %>  <% end %> <% end %><%= c.user.email %>:- <%= c.comment_string %><br></p>
+    
+    
+     <% end %>      
 
- <%= render 'comments/form' , :id => @post.id %>
- 
-<br><br><br><br>
+      <%= render partial: "comments/form" , locals: {category: @post.category , post: @post} %>
 
-<%#= link_to 'Edit', edit_post_path(@post) %> 
-<%= link_to 'Back', :back %>
+     
 
 
+  </div><br><br>
+
+<font size ="5"><%= link_to 'New Post', new_category_post_path %></font> <br><br>
+
+</font size = "5"><%= link_to 'Back', :back %></font>
 </center>
+
+
 </body>
 </html>
+  

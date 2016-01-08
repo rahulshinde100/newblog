@@ -18,40 +18,15 @@ class CategoriesController < ApplicationController
   end
 
 
-  def postwisesearch
-
-    #raise params.inspect
-    @comment =Comment.new
-    @post = Post.find_by_permalink(params[:id])
-   # raise @posts.inspect
-      
-    end 
-
-  def tagwisesearch
-     @comment = Comment.new
-      @tag = Tag.find_by_permalink(params[:id])
-      @posttag =Posttag.where(:tag_id => @tag.id)
-
-      #raise @posttag.inspect
-  end
-
-  def rahulcategory
-    #raise params.inspect
+  def show
+    #@categories = Category.all
     @comment = Comment.new
 
     @category = Category.find_by_permalink(params[:id])
     @post =Post.where(:category_id => @category.id)
-          
-  end
 
 
-
-
-  
-
-  def show
-    @categories = Category.all
-    respond_with(@category)
+    #respond_with(@category)
   end
 
   def new

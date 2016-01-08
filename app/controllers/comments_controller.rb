@@ -24,12 +24,14 @@ class CommentsController < ApplicationController
   end
 
   def new
-    
+
+   # raise params.inspect
     @comment = Comment.new
     respond_with(@comment)
   end
 
   def edit
+    #raise params.inspect
   end
 
   def create
@@ -38,7 +40,7 @@ class CommentsController < ApplicationController
     @comment.save
     #respond_with(@comment)
     # @post =Post.new
-    redirect_to postwisesearch_category_path(@comment.post_id)
+    redirect_to :back
   end
 
   def update
@@ -48,7 +50,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment.destroy
-    redirect_to categories_path
+    redirect_to :back
   end
 
   private

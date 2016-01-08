@@ -5,8 +5,9 @@
   <body>
 
 <center>
+<%# raise params.inspect %>
 
-<%= form_for(@post) do |f| %>
+<%= form_for [@category , @post]  do |f| %>
   <% if @post.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -20,16 +21,16 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %><br>
+    <%= f.label :title %><br><br>
     <%= f.text_field :title , :placeholder=>'Enter the Title' , required: true %>
-  </div>
+  </div><br>
   <div class="field">
-    <%= f.label :description %><br>
+    <%= f.label :description %><br><br>
     <%= f.text_area :description , :placeholder=>'Enter the Description' , required: true %>
 
-  </div>
+  </div><br>
   <div class= "field">
-
+      <%= f.label "Category" %><br><br>
       <%= f.collection_select(:category_id , Category.all, :id, :title,  :id => "options"  , prompt: true ) %><br><br>
 
 
@@ -38,11 +39,11 @@
   <div class= "field">
 
     <%= fields_for(@post_tag) do |ab| %>
-<%= ab.label "All Tag" %><br/>
+<%= ab.label "All Tag" %><br/><br>
 <%= collection_select(:tags, :id , @all_tags , :id, :tag_title , {:required => true} , {:multiple => true}) %>
 <% end %>
     
-  </div>
+  </div><br>
   <div class="actions">
     <%= f.submit %>
   </div>
