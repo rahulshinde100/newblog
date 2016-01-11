@@ -44,6 +44,14 @@
 <% end %>
     
   </div><br>
+
+
+  <div class="field">
+    <%= f.label :image %><br><br>
+    <%= f.file_field :image , :placeholder=>'Select Image' , required: true %>
+
+  </div>
+  <br>
   <div class="actions">
     <%= f.submit %>
   </div>

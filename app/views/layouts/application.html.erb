@@ -14,12 +14,12 @@
 	<div id="user_nav">
 
 		<div id ="home">
-		<font size= "20" ,color ="Red"><%= link_to 'Home', categories_path , {:style=>'color:#Ff0000;'} %> </font>
+		<font size= "20" ,color ="#F8F8FF"><%= link_to 'Home', categories_path , {:style=>'color:#F8F8FF;'} %> </font>
 		</div>
 		<div id ="usr" >
 			
 <% if user_signed_in? %>
- <font color = "blue" > <p id = "un" ><%= current_user.email %>   </font> Not You?
+ <font color = "blue" > <p id = "un" ><%= image_tag current_user.image(:thumb) , size: "30x25" %><%= current_user.fname.capitalize  %> <%= current_user.lname.capitalize  %>     </font> Not You?
 <%= link_to "Sign Out", destroy_user_session_path, :method => :delete %> </p>
 		</div>
 <% else %>

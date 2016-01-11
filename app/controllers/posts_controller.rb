@@ -93,7 +93,7 @@ p "===================================="
     def post_params
       #user_id = current_user.id
       params["post"].merge!(user_id: current_user.id)
-      params.require(:post).permit(:title, :description , :user_id , :category_id)
+      params.require(:post).permit(:title, :description , :user_id , :category_id , :image )
     end
    
 end

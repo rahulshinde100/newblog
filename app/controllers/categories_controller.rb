@@ -6,15 +6,19 @@ class CategoriesController < ApplicationController
 
   def index
     #@categories = Category.all
+    if user_signed_in?
+        @posts = Post.all
+        @comment = Comment.new
 
-     @posts = Post.all
-    @comment = Comment.new
-
-    @categories=Category.all
+        @categories=Category.all
 
   
     #@categories = Post.find(:id => params[:post_id])#.all
-    respond_with(@categories)
+        respond_with(@categories)
+    else
+      redirect_to new_user_session_path
+    end
+   
   end
 
 

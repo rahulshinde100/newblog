@@ -1,6 +1,12 @@
+
 body
 {
 	background-color: #B0B0B0;
+	
+}
+#timestamp
+{
+		color: black;
 }
 
 #home
@@ -16,7 +22,7 @@ body
 #header
 {
 
-	background-color: black;
+	background-color:  	#1E90FF;
 	height: 50px;
 	color: #87CEFA;
 }
@@ -65,4 +71,15 @@ h1
 	border: 1px dashed;
 	border-radius: 10px 120px;
 	
+}
+
+#showcategory
+{
+	background-color: #FFEBCD;
+	width: 500px;
+	color: #87CEFA;
+	margin-top: 10px;
+	margin-left: 50px;
+	border: 1px dashed;
+	border-radius: 10px 120px;
 }

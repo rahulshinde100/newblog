@@ -7,6 +7,12 @@ gem 'rails', '4.0.13'
 gem "has_permalink"
 # Use mysql as the database for Active Record
 gem 'mysql'
+gem 'country_select'
+
+
+gem 'jquery-ui-rails'
+
+gem "paperclip", "~> 4.3"
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'

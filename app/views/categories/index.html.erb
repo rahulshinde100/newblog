@@ -36,7 +36,7 @@
       <% @categories.each do |c| %>
 
       <td align="center">
-            <%= c.posts.count(:category_id) rescue "" %>
+            <%= c.posts.count rescue "" %>
      </td>
 
      <td align="center">
@@ -94,6 +94,9 @@
     <% end %>
 </table>
 
+<%#########################################  Test ##################################################%>
+  
+ 
 
 
 
